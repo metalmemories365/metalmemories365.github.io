@@ -1,19 +1,95 @@
- html>
+<!doctype html>
 <html lang="en">
 
 <head>
 
   <meta charset="UTF-8">
 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Metal Memories 365</title>
 
   <style>
 
-    body { font-family: Arial, sans-serif; text-align: center; background: #111; color: #fff; padding: 20px; }
+    body { margin:0; height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; background:#000; color:#fff; font-family:Arial, sans-serif; text-align:center; }
 
-    h1 { color: #ffcc00; }
+    h1 { font-size:3.5em; margin:0; }
 
-    img { max
+    p { font-size:1.5em; margin:1em 0; }
+
+    button { padding:1em 2em; font-size:1.5em; background:#444; color:#fff; border:none; border-radius:8px; cursor:pointer; }
+
+    button:hover { background:#666; }
+
+  </style>
+
+</head>
+
+<body>
+
+  <h1>Metal Memories 365</h1>
+
+  <p>Custom metal prints—vibrant, durable, ready to hang.</p>
+
+  <p>8x12: $54.88 | 11x14: $88</p>
+
+
+
+  <!-- Stripe script -->
+
+  <script src="https://js.stripe.com/v3/"></script>
+
+
+
+  <!-- Replace with YOUR publishable key from Stripe dashboard -->
+
+  <script>
+
+    var stripe = Stripe('pk_test_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');  // <-- PASTE YOUR KEY HERE
+
+
+
+    document.getElementById('buy8x12').addEventListener('click', function() {
+
+      stripe.redirectToCheckout({
+
+        lineItems: [{price: 'price_XXXXXXXXXXXXXXXXXXXXXXXX', quantity: 1}],  // <-- replace with your 8x12 price ID
+
+        mode: 'payment',
+
+        successUrl: 'https://metalmemories.net/success',
+
+        cancelUrl: 'https://metalmemories.net/cancel',
+
+      });
+
+    });
+
+
+
+    document.getElementById('buy11x14').addEventListener('click', function() {
+
+      stripe.redirectToCheckout({
+
+        lineItems: [{price: 'price_XXXXXXXXXXXXXXXXXXXXXXXX', quantity: 1}],  // <-- replace with your 11x14 price ID
+
+        mode: 'payment',
+
+        successUrl: 'https://metalmemories.net/success',
+
+        cancelUrl: 'https://metalmemories.net/cancel',
+
+      });
+
+    });
+
+  </script>
+
+</body>
+
+</html
+
+
 <script async
   src="https://js.stripe.com/v3/buy-button.js">
 </script>
