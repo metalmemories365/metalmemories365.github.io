@@ -6,40 +6,62 @@
     <title>Customize Your Print | Metal Memories 365</title>
     <style>
         body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #0a0a0a; color: #fff; text-align: center; padding: 40px 20px; }
-        .container { max-width: 800px; margin: auto; }
-        h2 { color: #ffcc00; text-transform: uppercase; }
+        .container { max-width: 900px; margin: auto; }
+        h2 { color: #ffcc00; text-transform: uppercase; margin-top: 40px; }
+
+        /* The Catalog Reference Section */
+        .catalog-ref { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
+        .catalog-ref img { width: 280px; border-radius: 10px; border: 1px solid #444; }
+
         .order-box { background: #111; padding: 30px; border-radius: 15px; border: 1px solid #444; text-align: left; margin-bottom: 40px; }
         label { color: #ffcc00; display: block; margin: 15px 0 5px; font-weight: bold; }
-        input, textarea { width: 100%; padding: 12px; border-radius: 5px; border: 1px solid #333; background: #222; color: #fff; box-sizing: border-box; }
+        input, textarea { width: 100%; padding: 12px; border-radius: 5px; border: none; background: #222; color: #fff; font-size: 1rem; box-sizing: border-box; }
+
         .pricing-grid { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
-        .card { background: #1a1a1a; padding: 25px; border-radius: 15px; width: 300px; border: 1px solid #333; }
-        .buy-btn { background: #ffcc00; color: #000; border: none; padding: 20px; width: 100%; font-size: 1.2rem; font-weight: bold; border-radius: 10px; cursor: pointer; margin-top: 15px; }
+        .card { background: #1a1a1a; padding: 25px; border-radius: 15px; width: 320px; border: 1px solid #333; }
+        .buy-btn { background: #ffcc00; color: #000; border: none; padding: 20px; width: 100%; font-size: 1.2rem; font-weight: bold; border-radius: 10px; cursor: pointer; margin-top: 15px; transition: 0.3s; }
         .buy-btn:hover { background: #fff; }
     </style>
     <script src="https://js.stripe.com/v3/"></script>
 </head>
 <body>
+
     <div class="container">
-        <h2>Step 1: Your Details</h2>
-        <div class="order-box">
-            <label>Name & Sport</label>
-            <input type="text" id="custInfo" placeholder="Ex: Zogas - Football">
-            <label>Design Notes (Background, Colors, etc.)</label>
-            <textarea id="notes" rows="4" placeholder="Ex: Green lightning, gloss finish..."></textarea>
-            <p style="font-size: 0.8rem; color: #888;">* You will email your photo to metalmemories594@gmail.com after checkout.</p>
+        <a href="index.html" style="color: #888; text-decoration: none;">← Back to Home</a>
+
+        <h2>Product Gallery</h2>
+        <div class="catalog-ref">
+            <img src="8X12-CATALOG-git.io.jpg" alt="8x12 Catalog">
+            <img src="11X14-CATALOG.jpg-git.io.jpg" alt="11x14 Catalog">
+            <img src="gunner5x7.jpg" alt="Gallery Example">
         </div>
 
-        <h2>Step 2: Choose Size</h2>
+        <hr style="border: 0; border-top: 1px solid #333; margin: 40px 0;">
+
+        <h2>Step 1: Design Details</h2>
+        <div class="order-box">
+            <label>Customer Name & Sport</label>
+            <input type="text" id="custInfo" placeholder="Ex: Zogas - Football">
+
+            <label>Design Notes (Background, Colors, Name/Number)</label>
+            <textarea id="notes" rows="4" placeholder="Ex: Lightning background, keep the Edison logo, Green/Gold colors..."></textarea>
+
+            <p style="font-size: 0.85rem; color: #ffcc00; margin-top: 15px;">
+                <strong>IMPORTANT:</strong> You will email your high-quality photo to <strong>metalmemories594@gmail.com</strong> immediately after payment.
+            </p>
+        </div>
+
+        <h2>Step 2: Order & Pay</h2>
         <div class="pricing-grid">
             <div class="card">
-                <h3>8x12 Print</h3>
+                <h3>8x12 DELUXE</h3>
                 <p>$48.88</p>
-                <button class="buy-btn" id="buy8x12">BUY 8x12</button>
+                <button class="buy-btn" id="buy8x12">PURCHASE 8x12</button>
             </div>
             <div class="card">
-                <h3>11x14 Print</h3>
+                <h3>11x14 DELUXE</h3>
                 <p>$88.80</p>
-                <button class="buy-btn" id="buy11x14">BUY 11x14</button>
+                <button class="buy-btn" id="buy11x14">PURCHASE 11x14</button>
             </div>
         </div>
     </div>
@@ -48,8 +70,10 @@
         const stripe = Stripe('pk_live_51TAyheGRwb0pbw5MnKWqys0u8Uxmve11CJjazlbGsGON1v5NXLoB7S097I0Y6I7O5hGf9X9kO3m1p3N8S6h7T00iO6yK6B');
 
         function checkFields() {
-            if (!document.getElementById('custInfo').value || !document.getElementById('notes').value) {
-                alert("Please fill in your info and notes first!");
+            const info = document.getElementById('custInfo').value;
+            const notes = document.getElementById('notes').value;
+            if (!info || !notes) {
+                alert("Please provide your name and design instructions first!");
                 return false;
             }
             return true;
@@ -81,5 +105,4 @@
     </script>
 </body>
 </html>
-
 
