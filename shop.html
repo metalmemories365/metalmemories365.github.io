@@ -3,106 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customize Your Print | Metal Memories 365</title>
+    <title>Select Your Background | Metal Memories 365</title>
     <style>
-        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #0a0a0a; color: #fff; text-align: center; padding: 40px 20px; }
-        .container { max-width: 900px; margin: auto; }
-        h2 { color: #ffcc00; text-transform: uppercase; margin-top: 40px; }
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #000; color: #fff; text-align: center; padding: 20px; }
+        .container { max-width: 1100px; margin: auto; }
+        h1 { color: #ffcc00; text-transform: uppercase; margin-top: 30px; }
+        h2 { border-bottom: 2px solid #ffcc00; display: inline-block; padding-bottom: 5px; margin-top: 50px; }
 
-        /* The Catalog Reference Section */
-        .catalog-ref { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
-        .catalog-ref img { width: 280px; border-radius: 10px; border: 1px solid #444; }
+        /* Catalog Styling */
+        .catalog-box { background: #111; padding: 20px; border-radius: 15px; border: 1px solid #333; margin-top: 20px; }
+        .catalog-img { width: 100%; max-width: 800px; border-radius: 10px; margin-bottom: 20px; border: 1px solid #444; }
 
-        .order-box { background: #111; padding: 30px; border-radius: 15px; border: 1px solid #444; text-align: left; margin-bottom: 40px; }
-        label { color: #ffcc00; display: block; margin: 15px 0 5px; font-weight: bold; }
-        input, textarea { width: 100%; padding: 12px; border-radius: 5px; border: none; background: #222; color: #fff; font-size: 1rem; box-sizing: border-box; }
+        /* Order Area */
+        .order-section { background: #1a1a1a; padding: 30px; border-radius: 15px; margin-top: 40px; text-align: left; border-left: 5px solid #ffcc00; }
+        label { color: #ffcc00; font-weight: bold; display: block; margin-bottom: 10px; }
+        textarea { width: 100%; padding: 15px; border-radius: 8px; background: #222; color: #fff; border: 1px solid #444; font-size: 1.1rem; box-sizing: border-box; }
 
-        .pricing-grid { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
-        .card { background: #1a1a1a; padding: 25px; border-radius: 15px; width: 320px; border: 1px solid #333; }
-        .buy-btn { background: #ffcc00; color: #000; border: none; padding: 20px; width: 100%; font-size: 1.2rem; font-weight: bold; border-radius: 10px; cursor: pointer; margin-top: 15px; transition: 0.3s; }
-        .buy-btn:hover { background: #fff; }
+        .buy-btn {
+            background: #ffcc00; color: #000; border: none; padding: 20px 40px;
+            font-size: 1.5rem; font-weight: bold; border-radius: 10px;
+            cursor: pointer; margin-top: 20px; width: 100%; transition: 0.3s;
+        }
+        .buy-btn:hover { background: #fff; transform: scale(1.02); }
     </style>
     <script src="https://js.stripe.com/v3/"></script>
 </head>
 <body>
 
     <div class="container">
-        <a href="index.html" style="color: #888; text-decoration: none;">← Back to Home</a>
+        <h1>Customize Your Deluxe Print</h1>
+        <p>Browse the catalogs below, then enter your choice at the bottom.</p>
 
-        <h2>Product Gallery</h2>
-        <div class="catalog-ref">
-            <img src="8X12-CATALOG-git.io.jpg" alt="8x12 Catalog">
-            <img src="11X14-CATALOG.jpg-git.io.jpg" alt="11x14 Catalog">
-            <img src="gunner5x7.jpg" alt="Gallery Example">
-        </div>
-
-        <hr style="border: 0; border-top: 1px solid #333; margin: 40px 0;">
-
-        <h2>Step 1: Design Details</h2>
-        <div class="order-box">
-            <label>Customer Name & Sport</label>
-            <input type="text" id="custInfo" placeholder="Ex: Zogas - Football">
-
-            <label>Design Notes (Background, Colors, Name/Number)</label>
-            <textarea id="notes" rows="4" placeholder="Ex: Lightning background, keep the Edison logo, Green/Gold colors..."></textarea>
-
-            <p style="font-size: 0.85rem; color: #ffcc00; margin-top: 15px;">
-                <strong>IMPORTANT:</strong> You will email your high-quality photo to <strong>metalmemories594@gmail.com</strong> immediately after payment.
-            </p>
-        </div>
-
-        <h2>Step 2: Order & Pay</h2>
-        <div class="pricing-grid">
-            <div class="card">
-                <h3>8x12 DELUXE</h3>
-                <p>$48.88</p>
-                <button class="buy-btn" id="buy8x12">PURCHASE 8x12</button>
-            </div>
-            <div class="card">
-                <h3>11x14 DELUXE</h3>
-                <p>$88.80</p>
-                <button class="buy-btn" id="buy11x14">PURCHASE 11x14</button>
+        <div class="catalog-box">
+            <h2>8x12 Catalog Options</h2>
+            <br>
+            <img src="8X12-CATALOG-git.io.jpg" alt="8x12 Background Catalog" class="catalog-img">
+            <div class="order-section">
+                <label>Which 8x12 Background & Name/Number?</label>
+                <textarea id="notes8" rows="2" placeholder="Example: Background #4, Blue/Gold, Zogas #12"></textarea>
+                <button class="buy-btn" id="buy8x12">PURCHASE 8x12 - $48.88</button>
             </div>
         </div>
+
+        <div class="catalog-box">
+            <h2>11x14 Catalog Options</h2>
+            <br>
+            <img src="11X14-CATALOG.jpg-git.io.jpg" alt="11x14 Background Catalog" class="catalog-img">
+            <div class="order-section">
+                <label>Which 11x14 Background & Name/Number?</label>
+                <textarea id="notes11" rows="2" placeholder="Example: Background #7, Red/Black, Smith #5"></textarea>
+                <button class="buy-btn" id="buy11x14">PURCHASE 11x14 - $88.80</button>
+            </div>
+        </div>
+
+        <p style="margin-top: 50px; color: #888;">* After payment, email your photo to <strong>metalmemories594@gmail.com</strong></p>
     </div>
 
     <script>
         const stripe = Stripe('pk_live_51TAyheGRwb0pbw5MnKWqys0u8Uxmve11CJjazlbGsGON1v5NXLoB7S097I0Y6I7O5hGf9X9kO3m1p3N8S6h7T00iO6yK6B');
 
-        function checkFields() {
-            const info = document.getElementById('custInfo').value;
-            const notes = document.getElementById('notes').value;
-            if (!info || !notes) {
-                alert("Please provide your name and design instructions first!");
-                return false;
-            }
-            return true;
-        }
-
         document.getElementById('buy8x12').onclick = function() {
-            if(checkFields()) {
-                stripe.redirectToCheckout({
-                    lineItems: [{ price: 'price_1TB1D3GRwb0pbw5MKe8KiTMr', quantity: 1 }],
-                    mode: 'payment',
-                    successUrl: 'https://metalmemory.net/success',
-                    cancelUrl: 'https://metalmemory.net/shop.html',
-                    shippingAddressCollection: { allowedCountries: ['US'] },
-                });
-            }
-        };
-
-        document.getElementById('buy11x14').onclick = function() {
-            if(checkFields()) {
-                stripe.redirectToCheckout({
-                    lineItems: [{ price: 'price_1TB1EYGRwb0pbw5MMX4nst6k', quantity: 1 }],
-                    mode: 'payment',
-                    successUrl: 'https://metalmemory.net/success',
-                    cancelUrl: 'https://metalmemory.net/shop.html',
-                    shippingAddressCollection: { allowedCountries: ['US'] },
-                });
-            }
-        };
-    </script>
-</body>
-</html>
-
+            stripe.redirectToCheckout({
+                lineItems: [{ price: 'price_1TB1D3GRwb0pbw5MKe8KiTMr', quantity: 1 }],
+                mode: 'payment',
+                successUrl: 'https://metalmemory.net/success',
+                cancelUrl: 'https://metalmemory.net/shop.html',
