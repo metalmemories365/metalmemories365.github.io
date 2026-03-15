@@ -1,101 +1,76 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metal Memories 365</title>
+    <style>
+        body {
+            margin: 0; padding: 40px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #111; color: #fff; text-align: center;
+        }
+        h1 { color: #ffcc00; font-size: 3rem; margin-bottom: 10px; }
+        p { font-size: 1.2rem; color: #ccc; margin-bottom: 30px; }
 
-  <meta charset="UTF-8">
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Metal Memories 365</title>
-
-  <style>
-
-    body { margin:0; height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; background:#000; color:#fff; font-family:Arial, sans-serif; text-align:center; }
-
-    h1 { font-size:3.5em; margin:0; }
-
-    p { font-size:1.5em; margin:1em 0; }
-
-    button { padding:1em 2em; font-size:1.5em; background:#444; color:#fff; border:none; border-radius:8px; cursor:pointer; }
-
-    button:hover { background:#666; }
-
-  </style>
-
+        .product-card {
+            background: #222; border: 1px solid #444; border-radius: 12px;
+            padding: 20px; margin: 20px auto; max-width: 400px;
+        }
+        button {
+            background: #ffcc00; color: #111; border: none;
+            padding: 15px 30px; font-size: 1.1rem; font-weight: bold;
+            border-radius: 5px; cursor: pointer; transition: 0.3s;
+        }
+        button:hover { background: #fff; transform: scale(1.05); }
+    </style>
+    <script src="https://js.stripe.com/v3/"></script>
 </head>
-
 <body>
 
-  <h1>Metal Memories 365</h1>
+    <h1>Metal Memories 365</h1>
+    <p>Premium Sublimation Metal Prints</p>
 
-  <p>Custom metal prints—vibrant, durable, ready to hang.</p>
+    <div class="product-card">
+        <h2>8x12 Metal Print</h2>
+        <p>Price: $54.88</p>
+        <button id="buy8x12">Purchase 8x12</button>
+    </div>
 
-  <p>8x12: $54.88 | 11x14: $88</p>
+    <div class="product-card">
+        <h2>11x14 Metal Print</h2>
+        <p>Price: $88.00</p>
+        <button id="buy11x14">Purchase 11x14</button>
+    </div>
+<script>
+    const stripe = Stripe('pk_live_51TAyheGRwb0pbw5MnKWqys0u8Uxmve11CJjazlbGsGON1v5NXLc7jcXsLZKcXg4rhCM1AHxgRiWotsD');
 
-
-
-  <!-- Stripe script -->
-
-  <script src="https://js.stripe.com/v3/"></script>
-
-
-
-  <!-- Replace with YOUR publishable key from Stripe dashboard -->
-
-  <script>
-
-    var stripe = Stripe('pk_test_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');  // <-- PASTE YOUR KEY HERE
-
-
-
-    document.getElementById('buy8x12').addEventListener('click', function() {
-
-      stripe.redirectToCheckout({
-
-        lineItems: [{price: 'price_XXXXXXXXXXXXXXXXXXXXXXXX', quantity: 1}],  // <-- replace with your 8x12 price ID
-
-        mode: 'payment',
-
-        successUrl: 'https://metalmemories.net/success',
-
-        cancelUrl: 'https://metalmemories.net/cancel',
-
-      });
-
+    // 8x12 Logic
+    document.getElementById('buy8x12').addEventListener('click', () => {
+        stripe.redirectToCheckout({
+            lineItems: [{ price: 'price_1TB1D3GRwb0pbw5MKe8KiTMr', quantity: 1 }],
+            mode: 'payment',
+            automaticTax: { enabled: true },
+            shippingAddressCollection: { allowedCountries: ['US'] },
+            successUrl: 'https://metalmemory.net/success',
+            cancelUrl: 'https://metalmemory.net/cancel',
+        });
     });
 
-
-
-    document.getElementById('buy11x14').addEventListener('click', function() {
-
-      stripe.redirectToCheckout({
-
-        lineItems: [{price: 'price_XXXXXXXXXXXXXXXXXXXXXXXX', quantity: 1}],  // <-- replace with your 11x14 price ID
-
-        mode: 'payment',
-
-        successUrl: 'https://metalmemories.net/success',
-
-        cancelUrl: 'https://metalmemories.net/cancel',
-
-      });
-
+    // 11x14 Logic
+    document.getElementById('buy11x14').addEventListener('click', () => {
+        stripe.redirectToCheckout({
+            lineItems: [{ price: 'price_1TB1EYGRwb0pbw5MMX4nst6k', quantity: 1 }],
+            mode: 'payment',
+            automaticTax: { enabled: true },
+            shippingAddressCollection: { allowedCountries: ['US'] },
+            successUrl: 'https://metalmemory.net/success',
+            cancelUrl: 'https://metalmemory.net/cancel',
+        });
     });
-
-  </script>
-
-</body>
-
-</html
-
-
-<script async
-  src="https://js.stripe.com/v3/buy-button.js">
 </script>
 
-<stripe-buy-button
-  buy-button-id="buy_btn_1TAyw5KDvf3NJpgD5MgknH8Z"
-  publishable-key="pk_test_51TAyhpKDvf3NJpgDv9B53z4UZWdXNY0dr6AkCcCsuERnM7U8qRquhd4JrORHCvhKS12EwhV7QbRNUpx21xZSolVI00uVInxQE9"
->
-</stripe-buy-button>
+
+
+
+ 
