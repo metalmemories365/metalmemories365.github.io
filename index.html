@@ -5,65 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Metal Memories 365</title>
     <style>
-        body { margin: 0; padding: 40px; font-family: 'Segoe UI', sans-serif; background: #111; color: #fff; text-align: center; }
-        h1 { color: #ffcc00; font-size: 3rem; margin-bottom: 10px; }
-        p { font-size: 1.2rem; color: #ccc; margin-bottom: 30px; }
-        .intro-gallery { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 40px; }
-        .intro-img { width: 300px; border-radius: 10px; border: 2px solid #444; }
-        .product-card { background: #222; border: 1px solid #444; border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 450px; }
-        .product-image { width: 100%; border-radius: 8px; margin-bottom: 15px; }
-        button { background: #ffcc00; color: #111; border: none; padding: 15px 30px; font-size: 1.1rem; font-weight: bold; border-radius: 5px; cursor: pointer; width: 100%; transition: 0.3s; }
-        button:hover { background: #fff; transform: scale(1.02); }
+        body { margin: 0; background: #000; font-family: 'Impact', sans-serif; color: #fff; text-align: center; }
+        .hero-container { max-width: 1000px; margin: 40px auto; padding: 20px; }
+        .hero-img { width: 100%; border-radius: 15px; box-shadow: 0 0 30px rgba(255, 204, 0, 0.4); }
+        .enter-btn {
+            display: inline-block; margin-top: 40px; background: #ffcc00; color: #000;
+            padding: 20px 60px; font-size: 1.8rem; text-decoration: none;
+            border-radius: 50px; font-weight: bold; transition: 0.3s;
+        }
+        .enter-btn:hover { background: #fff; transform: scale(1.05); }
     </style>
-    <script src="https://js.stripe.com/v3/"></script>
 </head>
 <body>
-
-    <h1>Metal Memories 365</h1>
-    <p>Premium Sublimation Metal Prints</p>
-
-    <div class="intro-gallery">
-        <img src="git-hub-ruler.jpg" alt="Ruler" class="intro-img">
-        <img src="gunner5x7.jpg" alt="Gunner" class="intro-img">
+    <div class="hero-container">
+        <img src="landing-hero.png" alt="Metal Memories Deluxe" class="hero-img">
+        <br>
+        <a href="shop.html" class="enter-btn">ENTER SHOP & CUSTOMIZE</a>
     </div>
-
-    <div class="product-card">
-        <img src="8X12-CATALOG-git.io.jpg" alt="8x12 Catalog" class="product-image">
-        <h2>8x12 Metal Print</h2>
-        <p>Price: $48.88</p>
-        <button id="buy8x12">Purchase 8x12</button>
-    </div>
-
-    <div class="product-card">
-        <img src="11X14-CATALOG.jpg-git.io.jpg" alt="11x14 Catalog" class="product-image">
-        <h2>11x14 Metal Print</h2>
-        <p>Price: $88.80</p>
-        <button id="buy11x14">Purchase 11x14</button>
-    </div>
-
-    <script>
-        const stripe = Stripe('pk_live_51TAyheGRwb0pbw5MnKWqys0u8Uxmve11CJjazlbGsGON1v5NXLoB7S097I0Y6I7O5hGf9X9kO3m1p3N8S6h7T00iO6yK6B');
-
-        document.getElementById('buy8x12').onclick = function() {
-            stripe.redirectToCheckout({
-                lineItems: [{ price: 'price_1TB1D3GRwb0pbw5MKe8KiTMr', quantity: 1 }],
-                mode: 'payment',
-                successUrl: 'https://metalmemory.net/success',
-                cancelUrl: 'https://metalmemory.net/index.html',
-                shippingAddressCollection: { allowedCountries: ['US'] },
-            });
-        };
-
-        document.getElementById('buy11x14').onclick = function() {
-            stripe.redirectToCheckout({
-                lineItems: [{ price: 'price_1TB1EYGRwb0pbw5MMX4nst6k', quantity: 1 }],
-                mode: 'payment',
-                successUrl: 'https://metalmemory.net/success',
-                cancelUrl: 'https://metalmemory.net/index.html',
-                shippingAddressCollection: { allowedCountries: ['US'] },
-            });
-        };
-    </script>
 </body>
 </html>
 
