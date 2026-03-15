@@ -5,24 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Metal Memories 365</title>
     <style>
-        body {
-            margin: 0; padding: 40px;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #111; color: #fff; text-align: center;
-        }
+        body { margin: 0; padding: 40px; font-family: 'Segoe UI', sans-serif; background: #111; color: #fff; text-align: center; }
         h1 { color: #ffcc00; font-size: 3rem; margin-bottom: 10px; }
         p { font-size: 1.2rem; color: #ccc; margin-bottom: 30px; }
 
+        /* Gallery for the top images */
+        .intro-gallery { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 40px; }
+        .intro-img { width: 300px; border-radius: 10px; border: 2px solid #444; }
+
         .product-card {
             background: #222; border: 1px solid #444; border-radius: 12px;
-            padding: 20px; margin: 20px auto; max-width: 400px;
+            padding: 20px; margin: 20px auto; max-width: 450px;
         }
+        .product-image { width: 100%; border-radius: 8px; margin-bottom: 15px; }
+
         button {
-            background: #ffcc00; color: #111; border: none;
-            padding: 15px 30px; font-size: 1.1rem; font-weight: bold;
-            border-radius: 5px; cursor: pointer; transition: 0.3s;
+            background: #ffcc00; color: #111; border: none; padding: 15px 30px;
+            font-size: 1.1rem; font-weight: bold; border-radius: 5px; cursor: pointer; width: 100%;
         }
-        button:hover { background: #fff; transform: scale(1.05); }
+        button:hover { background: #fff; transform: scale(1.02); }
     </style>
     <script src="https://js.stripe.com/v3/"></script>
 </head>
@@ -31,48 +32,49 @@
     <h1>Metal Memories 365</h1>
     <p>Premium Sublimation Metal Prints</p>
 
+    <div class="intro-gallery">
+        <img src="git-hub-ruler.jpg" alt="Metal Ruler" class="intro-img">
+        <img src="gunner5x7.jpg" alt="Gunner Print" class="intro-img">
+    </div>
+
+    <hr style="border: 0; border-top: 1px solid #444; margin: 40px auto; width: 50%;">
+
     <div class="product-card">
+        <img src="8X12-CATALOG-git.io.jpg" alt="8x12 Catalog" class="product-image">
         <h2>8x12 Metal Print</h2>
         <p>Price: $48.88</p>
         <button id="buy8x12">Purchase 8x12</button>
     </div>
 
     <div class="product-card">
+        <img src="11X14-CATALOG.jpg-git.io.jpg" alt="11x14 Catalog" class="product-image">
         <h2>11x14 Metal Print</h2>
         <p>Price: $88.80</p>
         <button id="buy11x14">Purchase 11x14</button>
     </div>
-<script>
-    const stripe = Stripe('pk_live_51TAyheGRwb0pbw5MnKWqys0u8Uxmve11CJjazlbGsGON1v5NXLc7jcXsLZKcXg4rhCM1AHxgRiWotsD');
 
-    // 8x12 Logic
-    document.getElementById('buy8x12').addEventListener('click', () => {
-        stripe.redirectToCheckout({
-            lineItems: [{ price: 'price_1TB1D3GRwb0pbw5MKe8KiTMr', quantity: 1 }],
-            mode: 'payment',
-            automaticTax: { enabled: true },
-            shippingAddressCollection: { allowedCountries: ['US'] },
-            successUrl: 'https://metalmemory.net/success',
-            cancelUrl: 'https://metalmemory.net/cancel',
+    <script>
+        const stripe = Stripe('pk_live_51TAyheGRwb0pbw5MnKWqys0u8Uxmve11CJjazlbGsGON1v5NXLoB7S097I0Y6I7O5hGf9X9kO3m1p3N8S6h7T00iO6yK6B');
+
+        document.getElementById('buy8x12').addEventListener('click', () => {
+            stripe.redirectToCheckout({
+                lineItems: [{ price: 'price_1TB1D3GRwb0pbw5MKe8KiTMr', quantity: 1 }],
+                mode: 'payment',
+                successUrl: 'https://metalmemory.net/success',
+                cancelUrl: 'https://metalmemory.net/index.html',
+                shippingAddressCollection: { allowedCountries: ['US'] },
+            });
         });
-    });
 
-    // 11x14 Logic
-    document.getElementById('buy11x14').addEventListener('click', () => {
-        stripe.redirectToCheckout({
-            lineItems: [{ price: 'price_1TB1EYGRwb0pbw5MMX4nst6k', quantity: 1 }],
-            mode: 'payment',
-            automaticTax: { enabled: true },
-            shippingAddressCollection: { allowedCountries: ['US'] },
-            successUrl: 'https://metalmemory.net/success',
-            cancelUrl: 'https://metalmemory.net/cancel',
+        document.getElementById('buy11x14').addEventListener('click', () => {
+            stripe.redirectToCheckout({
+                lineItems: [{ price: 'price_1TB1EYGRwb0pbw5MMX4nst6k', quantity: 1 }],
+                mode: 'payment',
+                successUrl: 'https://metalmemory.net/success',
+                cancelUrl: 'https://metalmemory.net/index.html',
+                shippingAddressCollection: { allowedCountries: ['US'] },
+            });
         });
-    });
-</script>
-
-    
-
-
-
-
- 
+    </script>
+</body>
+</html>
