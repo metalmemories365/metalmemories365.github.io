@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customize Your Print | Metal Memories 365</title>
+    <style>
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #0a0a0a; color: #fff; text-align: center; padding: 40px 20px; }
+        .container { max-width: 800px; margin: auto; }
+        h2 { color: #ffcc00; text-transform: uppercase; }
+        .order-box { background: #111; padding: 30px; border-radius: 15px; border: 1px solid #444; text-align: left; margin-bottom: 40px; }
+        label { color: #ffcc00; display: block; margin: 15px 0 5px; font-weight: bold; }
+        input, textarea { width: 100%; padding: 12px; border-radius: 5px; border: 1px solid #333; background: #222; color: #fff; box-sizing: border-box; }
+        .pricing-grid { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+        .card { background: #1a1a1a; padding: 25px; border-radius: 15px; width: 300px; border: 1px solid #333; }
+        .buy-btn { background: #ffcc00; color: #000; border: none; padding: 20px; width: 100%; font-size: 1.2rem; font-weight: bold; border-radius: 10px; cursor: pointer; margin-top: 15px; }
+        .buy-btn:hover { background: #fff; }
+    </style>
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Step 1: Your Details</h2>
+        <div class="order-box">
+            <label>Name & Sport</label>
+            <input type="text" id="custInfo" placeholder="Ex: Zogas - Football">
+            <label>Design Notes (Background, Colors, etc.)</label>
+            <textarea id="notes" rows="4" placeholder="Ex: Green lightning, gloss finish..."></textarea>
+            <p style="font-size: 0.8rem; color: #888;">* You will email your photo to metalmemories594@gmail.com after checkout.</p>
+        </div>
+
+        <h2>Step 2: Choose Size</h2>
+        <div class="pricing-grid">
+            <div class="card">
+                <h3>8x12 Print</h3>
+                <p>$48.88</p>
+                <button class="buy-btn" id="buy8x12">BUY 8x12</button>
+            </div>
+            <div class="card">
+                <h3>11x14 Print</h3>
+                <p>$88.80</p>
+                <button class="buy-btn" id="buy11x14">BUY 11x14</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const stripe = Stripe('pk_live_51TAyheGRwb0pbw5MnKWqys0u8Uxmve11CJjazlbGsGON1v5NXLoB7S097I0Y6I7O5hGf9X9kO3m1p3N8S6h7T00iO6yK6B');
+
+        function checkFields() {
+            if (!document.getElementById('custInfo').value || !document.getElementById('notes').value) {
+                alert("Please fill in your info and notes first!");
+                return false;
+            }
+            return true;
+        }
+
+        document.getElementById('buy8x12').onclick = function() {
+            if(checkFields()) {
+                stripe.redirectToCheckout({
+                    lineItems: [{ price: 'price_1TB1D3GRwb0pbw5MKe8KiTMr', quantity: 1 }],
+                    mode: 'payment',
+                    successUrl: 'https://metalmemory.net/success',
+                    cancelUrl: 'https://metalmemory.net/shop.html',
+                    shippingAddressCollection: { allowedCountries: ['US'] },
+                });
+            }
+        };
+
+        document.getElementById('buy11x14').onclick = function() {
+            if(checkFields()) {
+                stripe.redirectToCheckout({
+                    lineItems: [{ price: 'price_1TB1EYGRwb0pbw5MMX4nst6k', quantity: 1 }],
+                    mode: 'payment',
+                    successUrl: 'https://metalmemory.net/success',
+                    cancelUrl: 'https://metalmemory.net/shop.html',
+                    shippingAddressCollection: { allowedCountries: ['US'] },
+                });
+            }
+        };
+    </script>
+</body>
+</html>
+
+
