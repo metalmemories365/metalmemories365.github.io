@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Metal Memories 365</title>
-    <style>
+   <style>
         /* Base Page Styles */
         body {
             margin: 0;
@@ -21,59 +21,83 @@
             padding: 15px;
         }
 
-        /* The Hero Image */
         .hero-img {
             width: 100%;
-            height: auto;
-            border-radius: 12px;
-            box-shadow: 0 0 40px rgba(255, 204, 0, 0.25);
-            display: block;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
         }
 
-        /* Pulsing Enter Button */
+        /* Category Grid Styling */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .card {
+            background: #111;
+            border: 2px solid #333;
+            border-radius: 15px;
+            padding: 25px;
+            transition: 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card:hover {
+            border-color: #ffcc00;
+            transform: scale(1.03);
+            box-shadow: 0 0 15px rgba(255, 204, 0, 0.3);
+        }
+
+        .card h3 {
+            color: #ffcc00;
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .card p {
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 0.95rem;
+            color: #ccc;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        /* Pulsing Button Style */
         .enter-btn {
             display: inline-block;
-            margin-top: 30px;
             background: #ffcc00;
             color: #000;
-            padding: 18px 50px;
-            font-size: 1.8rem;
+            padding: 15px 30px;
+            font-size: 1.2rem;
             text-decoration: none;
             border-radius: 50px;
             font-weight: bold;
-            transition: 0.3s;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            transition: 0.3s;
             animation: pulse-glow 2s infinite;
         }
 
-        /* Interaction Effects */
         .enter-btn:hover {
             background: #fff;
-            transform: scale(1.05);
             animation: none;
         }
 
-        /* The "Lightning" Pulse Animation */
+        /* Lightning Pulse Animation */
         @keyframes pulse-glow {
-            0% {
-                box-shadow: 0 0 0 0 rgba(255, 204, 0, 0.7);
-            }
-            70% {
-                box-shadow: 0 0 0 20px rgba(255, 204, 0, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(255, 204, 0, 0);
-            }
+            0% { box-shadow: 0 0 0 0 rgba(255, 204, 0, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(255, 204, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 204, 0, 0); }
         }
 
-        /* Mobile Adjustments */
         @media (max-width: 600px) {
-            .enter-btn {
-                font-size: 1.4rem;
-                padding: 15px 30px;
-                width: 80%;
-            }
+            .enter-btn { font-size: 1rem; width: 90%; }
         }
     </style>
 </head>
@@ -82,9 +106,29 @@
     <div class="hero-container">
         <img src="image-for-landing.jpg" alt="Metal Memories Deluxe Collector's Edition" class="hero-img">
 
-        <br>
+        <br><br>
 
-        <a href="shop.html" class="enter-btn">ENTER SHOP & CUSTOMIZE</a>
+        <a href="shop.html" class="enter-btn">ENTER FULL SHOP & CUSTOMIZE</a>
+    </div>
+
+    <div class="category-grid">
+        <div class="card">
+            <h3>SPORTS COLLAGES</h3>
+            <p>Championship tributes for athletes and teams. Turn game-day photos into metal memories.</p>
+            <a href="https://buy.stripe.com/8x2aEX50vex7a50gf1eME00" class="enter-btn" style="animation: none; font-size: 1rem;">ORDER SPORTS</a>
+        </div>
+
+        <div class="card">
+            <h3>WIND SPINNERS</h3>
+            <p>10-inch "In Loving Memory" tributes. Beautiful, weather-resistant outdoor honors.</p>
+            <a href="https://buy.stripe.com/6oU4gzgJd0Gh7XG4wjEME01" class="enter-btn" style="animation: none; font-size: 1rem;">ORDER SPINNER</a>
+        </div>
+
+        <div class="card">
+            <h3>HOLIDAY & CUSTOM</h3>
+            <p>Personalized prints for Christmas, weddings, and anniversaries. The perfect custom gift.</p>
+            <a href="https://buy.stripe.com/8x2aEX50vex7a50gf1eME00" class="enter-btn" style="animation: none; font-size: 1rem;">ORDER CUSTOM</a>
+        </div>
     </div>
 
 </body>
