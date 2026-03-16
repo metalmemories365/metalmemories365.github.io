@@ -3,50 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Your Deluxe Collage | Metal Memories 365</title>
+    <title>Customize Your Print | Metal Memories 365</title>
     <style>
-        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #1a1a1a; color: #fff; text-align: center; padding: 20px; }
-        .container { max-width: 1000px; margin: auto; }
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #0a0a0a; color: #fff; text-align: center; padding: 40px 20px; }
+        .container { max-width: 900px; margin: auto; }
+        h2 { color: #ffcc00; text-transform: uppercase; margin-top: 40px; }
 
-        /* Catalog Reference Section */
-        .reference-section { margin-bottom: 50px; }
-        .catalog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
-        .catalog-item img { width: 100%; border-radius: 8px; border: 2px solid #444; }
-        h2 { color: #ffcc00; text-transform: uppercase; border-bottom: 2px solid #ffcc00; display: inline-block; }
+        /* The Catalog Reference Section */
+        .catalog-ref { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
+        .catalog-ref img { width: 280px; border-radius: 10px; border: 1px solid #444; }
 
-        /* Metal Order Box Styling */
-        .metal-panel {
-            background: linear-gradient(145deg, #999, #555);
-            border: 4px solid #333;
-            border-radius: 15px;
-            padding: 30px;
-            color: #000;
-            text-align: left;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            margin-top: 40px;
-        }
+        .order-box { background: #111; padding: 30px; border-radius: 15px; border: 1px solid #444; text-align: left; margin-bottom: 40px; }
+        label { color: #ffcc00; display: block; margin: 15px 0 5px; font-weight: bold; }
+        input, textarea { width: 100%; padding: 12px; border-radius: 5px; border: none; background: #222; color: #fff; font-size: 1rem; box-sizing: border-box; }
 
-        .panel-title { font-family: 'Impact', sans-serif; font-size: 1.8rem; border-bottom: 1px solid #444; margin-bottom: 20px; }
-
-        label { font-weight: bold; display: block; margin-top: 15px; }
-        input, textarea, select {
-            width: 100%; padding: 12px; margin-top: 5px; border-radius: 5px;
-            border: 1px solid #888; box-sizing: border-box; font-size: 1rem;
-        }
-
-        .price-display { font-size: 1.5rem; font-weight: bold; margin: 20px 0; color: #b00; }
-
-        .buy-btn {
-            background: #333; color: #fff; border: none; padding: 20px;
-            font-size: 1.5rem; font-weight: bold; border-radius: 8px;
-            cursor: pointer; width: 100%; transition: 0.3s;
-            text-transform: uppercase;
-        }
-        .buy-btn:hover { background: #000; transform: scale(1.02); }
+        .pricing-grid { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+        .card { background: #1a1a1a; padding: 25px; border-radius: 15px; width: 320px; border: 1px solid #333; }
+        .buy-btn { background: #ffcc00; color: #000; border: none; padding: 20px; width: 100%; font-size: 1.2rem; font-weight: bold; border-radius: 10px; cursor: pointer; margin-top: 15px; transition: 0.3s; }
+        .buy-btn:hover { background: #fff; }
     </style>
     <script src="https://js.stripe.com/v3/"></script>
 </head>
 <body>
+
+    <div class="container">
+        <a href="index.html" style="color: #888; text-decoration: none;">← Back to Home</a>
+
+        <h2>Product Gallery</h2>
+        <div class="catalog-ref">
+            <img src="8X12-CATALOG-git.io.jpg" alt="8x12 Catalog">
+            <img src="11X14-CATALOG.jpg-git.io.jpg" alt="11x14 Catalog">
+            <img src="gunner5x7.jpg" alt="Gallery Example">
+        </div>
+
+        <hr style="border: 0; border-top: 1px solid #333; margin: 40px 0;">
+
+        <h2>Step 1: Design Details</h2>
+        <div class="order-box">
+            <label>Customer Name & Sport</label>
+            <input type="text" id="custInfo" placeholder="Ex: Zogas - Football">
+
+            <label>Design Notes (Background, Colors, Name/Number)</label>
+            <textarea id="notes" rows="4" placeholder="Ex: Lightning background, keep the Edison logo, Green/Gold colors..."></textarea>
+
+            <p style="font-size: 0.85rem; color: #ffcc00; margin-top: 15px;">
+                <strong>IMPORTANT:</strong> You will email your high-quality photo to <strong>metalmemories594@gmail.com</strong> immediately after payment.
+            </p>
+        </div>
+
+        <h2>Step 2: Order & Pay</h2>
+        <div class="pricing-grid">
+            <div class="card">
+                <h3>8x12 DELUXE</h3>
+                <p>$48.88</p>
+                <button class="buy-btn" id="buy8x12">PURCHASE 8x12</button>
+            </div>
+            <div class="card">
+                <h3>11x14 DELUXE</h3>
+                <p>$88.80</p>
+                <button class="buy-btn" id="buy11x14">PURCHASE 11x14</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const stripe = Stripe('pk_live_51TAyheGRwb0pbw5MnKWqys0u8Uxmve11CJjazlbGsGON1v5NXLoB7S097I0Y6I7O5hGf9X9kO3m1p3N8S6h7T00iO6yK6B');
+
+        function checkFields() {
+            const info = document.getElementById('custInfo').value;
+            const notes = document.getElementById('notes').value;
+            if (!info || !notes) {
+                alert("Please provide your name and design instructions first!");
+                return false;
+            }
+            return true;
+        }
+
+        document.getElementById('buy8x12').onclick = function() {
+            if(checkFields()) {
+                stripe.redirectToCheckout({
+                    lineItems: [{ price: 'price_1TB1D3GRwb0pbw5MKe8KiTMr', quantity: 1 }],
+                    mode: 'payment',
+                    successUrl: 'https://metalmemory.net/success',
+                    cancelUrl: 'https://metalmemory.net/shop.html',
+                    shippingAddressCollection: { allowedCountries: ['US'] },
+                });
+            }
+        };
+
+        document.getElementById('buy11x14').onclick = function() {
+            if(checkFields()) {
+                stripe.redirectToCheckout({
+                    lineItems: [{ price: 'price_1TB1EYGRwb0pbw5MMX4nst6k', quantity: 1 }],
+                    mode: 'payment',
+                    successUrl: 'https://metalmemory.net/success',
+                    cancelUrl: 'https://metalmemory.net/shop.html',
+                    shippingAddressCollection: { allowedCountries: ['US'] },
+                });
+            }
+        };
+    </script>
+</body>
+</html>
+
+
+
+Ztelios Ztelios
+Sun, Mar 15, 3:56 PM (11 hours ago)
+<title>Order Your Deluxe Collage | Metal Memories 365</title> <style> body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #1a1a1a; color: #fff; t
+
+Ztelios Ztelios
+3:25 AM (6 minutes ago)
+to me
 
 <div class="container">
     <div class="reference-section">
@@ -58,7 +126,7 @@
             </div>
             <div class="catalog-item">
                 <p>11x14 Options</p>
-                <img src="11X14-CATALOG.jpg-git.io.jpg" alt="11x14 Catalog">
+                <img src="11X14-CATALOG-jpg.git.io.jpg" alt="11x14 Catalog">
             </div>
         </div>
     </div>
@@ -66,57 +134,81 @@
     <div class="metal-panel">
         <div class="panel-title">YOUR DELUXE PRINT DETAILS</div>
 
-        <label>Select Size</label>
+        <label for="size-select">Select Size</label>
         <select id="size-select" onchange="updatePrice()">
-            <option value="price_1TB1D3GRwb0pbw5MKe8KiTMr">8x12 Print - $58.88</option>
-            <option value="price_1TB7YcGRwb0pbw5MT0C8O86S">11x14 Print - $98.88</option>
+            <option value="" disabled selected>-- Select Size --</option>
+            <option value="price_1TB1D3GRwb0pbw5MKe8KiTMr">8x12 Metal Print - $58.88</option>
+            <option value="YOUR_11x14_PRICE_ID_HERE">11x14 Metal Print - $98.88</option>
         </select>
 
-        <div style="display: flex; gap: 10px;">
-            <div style="flex: 1;">
-                <label>Name/Number</label>
-                <input type="text" id="cust-name" placeholder="e.g., Zogas #12">
-            </div>
-            <div style="flex: 1;">
-                <label>Custom Colors</label>
-                <input type="text" id="cust-colors" placeholder="e.g., Blue & Gold">
-            </div>
-        </div>
+        <label for="cust-name">Full Name</label>
+        <input type="text" id="cust-name" placeholder="First & Last Name">
 
-        <label>Background Style #</label>
+        <label for="cust-bg">Background Style #</label>
         <input type="text" id="cust-bg" placeholder="e.g., Background #4">
 
-        <label>Any Specific Notes?</label>
+        <label for="cust-notes">Any Specific Notes?</label>
         <textarea id="cust-notes" rows="3"></textarea>
 
-        <div class="price-display">Total: <span id="display-amount">$58.88</span></div>
+        <div class="price-display">
+            Total: <span id="display-amount">$0.00</span>
+        </div>
 
         <button class="buy-btn" id="checkout-button">COMPLETE PURCHASE</button>
-        <p style="font-size: 0.8rem; text-align: center; margin-top: 10px;">* After payment, email photos to metalmemories594@gmail.com</p>
+        <p style="font-size: 0.8rem; text-align: center; margin-top: 10px;">
+            * After payment, email photos to metalmemories365@gmail.com
+        </p>
     </div>
 </div>
 
+<script src="https://js.stripe.com/v3/"></script>
 <script>
-    const stripe = Stripe('pk_live_51TAyheGRwb0pbw5MnKWqys0u8Uxmve11CJjazlbGsGON1v5NXLoB7S097I0Y6I7O5hGf9X9kO3m1p3N8S6h7T00iO6yK6B');
+    // Initialize Stripe
+    const stripe = Stripe('pk_live_51TAyheGRwb0pbw5MnKWqys0u8Uxmve11CJjazlbGsGON1v5NXLoB7S097I0Y6I705hGf9X9kO3m1p3N8S6I...');
 
+    // 1. Fixed Price Display Logic
     function updatePrice() {
         const select = document.getElementById('size-select');
         const display = document.getElementById('display-amount');
-        display.innerText = select.value === 'price_1TB1D3GRwb0pbw5MKe8KiTMr' ? '$58.88' : '$98.88';
+
+        if (select.value === 'price_1TB1D3GRwb0pbw5MKe8KiTMr') {
+            display.innerText = '$58.88';
+        } else if (select.value !== "") {
+            display.innerText = '$98.88';
+        }
     }
 
-    document.getElementById('checkout-button').addEventListener('click', function () {
+    // 2. Dialed-In Checkout Logic
+    document.getElementById('checkout-button').addEventListener('click', function() {
+        // Grab values
         const priceId = document.getElementById('size-select').value;
-        const details = `Name: ${document.getElementById('cust-name').value} | Colors: ${document.getElementById('cust-colors').value} | BG: ${document.getElementById('cust-bg').value}`;
+        const name = document.getElementById('cust-name').value;
+        const bg = document.getElementById('cust-bg').value;
+        const notes = document.getElementById('cust-notes').value;
 
+        // Validation - stop the script if critical info is missing
+        if (!priceId) {
+            alert("Please select a size.");
+            return;
+        }
+        if (!name) {
+            alert("Please enter your name so we know whose order this is!");
+            return;
+        }
+
+        // Create the details string for your success page
+        const details = `Name: ${name} | BG: ${bg} | Notes: ${notes}`;
+
+        // Call Stripe
         stripe.redirectToCheckout({
             lineItems: [{ price: priceId, quantity: 1 }],
             mode: 'payment',
             successUrl: 'https://metalmemory.net/success?details=' + encodeURIComponent(details),
             cancelUrl: 'https://metalmemory.net/shop.html',
+        }).then(function (result) {
+            if (result.error) {
+                alert(result.error.message);
+            }
         });
     });
 </script>
-
-</body>
-</html>
