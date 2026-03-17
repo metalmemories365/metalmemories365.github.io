@@ -3,119 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Custom Sports Shop | Metal Memories 365</title>
+    <title>Select Size | Metal Memories 365</title>
     <style>
-        :root { --neon-blue: #00d2ff; --dark-bg: #000; --panel-gray: #111; }
-        
-        body { 
-            margin: 0; font-family: 'Segoe UI', Arial, sans-serif; 
-            background: var(--dark-bg); color: #fff; padding: 20px; 
+        body { background: #000; color: #fff; font-family: 'Arial Black', sans-serif; text-align: center; padding: 20px; }
+        .container { max-width: 900px; margin: auto; }
+        .catalog-img { width: 100%; border-radius: 15px; border: 2px solid #333; margin-bottom: 30px; }
+        .btn-container { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+        .size-btn { 
+            padding: 25px 40px; font-size: 1.5rem; text-decoration: none; border-radius: 10px; font-weight: bold; transition: 0.3s;
+            width: 280px; text-transform: uppercase;
         }
-
-        .container { max-width: 1100px; margin: auto; }
-        
-        header { margin-bottom: 30px; border-bottom: 1px solid #333; padding-bottom: 20px; text-align: left; }
-        h1 { font-family: 'Impact', sans-serif; font-size: 2.5rem; color: var(--neon-blue); margin: 0; }
-        .back-link { color: #666; text-decoration: none; font-size: 0.9rem; }
-        .back-link:hover { color: var(--neon-blue); }
-
-        .flex-layout { display: flex; gap: 30px; flex-wrap: wrap; }
-
-        /* Left Side: Catalog */
-        .catalog-side { flex: 1.2; min-width: 320px; }
-        .catalog-img { 
-            width: 100%; border-radius: 8px; border: 1px solid #444; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
-        }
-
-        /* Right Side: Order Form */
-        .order-side { 
-            flex: 1; min-width: 320px; background: var(--panel-gray); 
-            padding: 25px; border-radius: 12px; border: 1px solid #222;
-        }
-
-        .panel-title { font-family: 'Impact', sans-serif; font-size: 1.5rem; margin-bottom: 20px; color: #fff; border-bottom: 1px solid var(--neon-blue); padding-bottom: 10px; }
-        
-        label { display: block; margin-top: 15px; font-weight: bold; font-size: 0.8rem; color: #aaa; text-transform: uppercase; }
-        
-        input, select, textarea { 
-            width: 100%; padding: 12px; margin-top: 5px; border-radius: 6px; 
-            border: 1px solid #333; background: #222; color: #fff; box-sizing: border-box; 
-        }
-
-        .price-box { 
-            background: #000; padding: 15px; border-radius: 6px; margin-top: 20px;
-            font-size: 1.8rem; font-weight: bold; color: var(--neon-blue); text-align: center;
-        }
-
-        .buy-btn {
-            background: var(--neon-blue); color: #000; border: none; padding: 18px;
-            font-size: 1.2rem; font-weight: bold; border-radius: 6px;
-            cursor: pointer; width: 100%; margin-top: 20px; text-transform: uppercase;
-            transition: 0.3s;
-        }
-        .buy-btn:hover { background: #fff; box-shadow: 0 0 15px var(--neon-blue); }
-
-        .note { font-size: 0.8rem; color: #666; margin-top: 15px; line-height: 1.4; text-align: center; }
+        .btn-8x12 { background: #00d2ff; color: #000; box-shadow: 0 0 15px #00d2ff; }
+        .btn-11x14 { background: #9d50bb; color: #fff; box-shadow: 0 0 15px #9d50bb; }
+        .size-btn:hover { transform: scale(1.05); filter: brightness(1.2); }
     </style>
 </head>
 <body>
-
-<div class="container">
-    <header>
-        <a href="index.html" class="back-link">← BACK TO HOME</a>
-        <h1>SPORTS CUSTOMIZATION SHOP</h1>
-    </header>
-
-    <div class="flex-layout">
-        <div class="catalog-side">
-            <img src="html.sports.jpg" alt="Design Catalog" class="catalog-img">
+    <div class="container">
+        <h1 style="color: #ffcc00;">CHOOSE YOUR PRINT SIZE</h1>
+        <img src="html.sports.jpg" alt="Sports Catalog" class="catalog-img">
+        
+        <div class="btn-container">
+            <a href="order8x12.html" class="size-btn btn-8x12">Order 8x12<br>$58.88</a>
+            <a href="order11x14.html" class="size-btn btn-11x14">Order 11x14<br>$98.88</a>
         </div>
-
-        <div class="order-side">
-            <div class="panel-title">1. ENTER PRINT DETAILS</div>
-
-            <form id="metalOrderForm" action="https://formspree.io/f/metalmemories365@gmail.com" method="POST">
-                
-                <label>Select Your Size</label>
-                <select id="size-choice" name="Size_Selection" onchange="updateDisplay()" required>
-                    <option value="" disabled selected>-- Choose Size --</option>
-                    <option value="8x12">8x12 Metal Print - $58.88</option>
-                    <option value="11x14">11x14 Metal Print - $98.88</option>
-                </select>
-
-                <label>Customer Full Name</label>
-                <input type="text" name="Customer_Name" id="cust-name" placeholder="Name for order" required>
-
-                <label>Player Name & Team #</label>
-                <input type="text" name="Player_Details" placeholder="e.g. Joshie Smith #5" required>
-
-                <label>Background Style # (From Catalog)</label>
-                <input type="text" name="Style_Number" placeholder="e.g. Style #12">
-
-                <label>Background Color / Custom Notes</label>
-                <textarea name="Notes" rows="3" placeholder="e.g. Please use Dodgers Blue/White colors..."></textarea>
-
-                <div class="price-box">Total: <span id="amount-text">$0.00</span></div>
-
-                <button type="submit" class="buy-btn">Submit & Go To Payment</button>
-
-                <div class="note">
-                    * Details are sent to Stelios at Metal Memories.<br>
-                    ** Payment page opens automatically after clicking.
-                </div>
-            </form>
-        </div>
+        <br><br>
+        <a href="index.html" style="color: #666; text-decoration: none;">← Back to Home</a>
     </div>
-</div>
-
-<script>
-    // Updates the visual price on the form
-    function updateDisplay() {
-        const size = document.getElementById('size-choice').value;
-        const text = document.getElementById('amount-text');
-        text.innerText = (size === "8x12") ? "$58.88" : "$98.88";
-    }
-
-    // Logic to send email THEN redirect to Stripe
-    const form = document.getElementById('metal
+</body>
+</html>
