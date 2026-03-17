@@ -19,17 +19,27 @@
         .btn-11x14 { background: var(--neon-purple); color: #fff; box-shadow: 0 0 20px var(--neon-purple); }
         .size-btn:hover { transform: translateY(-5px); filter: brightness(1.2); }
         .price { font-size: 2rem; display: block; margin-top: 5px; }
-        .back-link { display: inline-block; margin-top: 50px; color: #666; text-decoration: none; font-family: Arial, sans-serif; }
+        .back-link { display: inline-block; margin-top: 50px; color: #666; text-decoration: none; font-family: Arial, sans-serif; transition: 0.3s; }
+        .back-link:hover { color: #fff; }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Choose Your Print Size</h1>
         <img src="html.sports.jpg" alt="Sports Catalog" class="catalog-img">
+        
         <div class="btn-container">
-            <a href="8x12.html" class="size-btn btn-8x12">Order 8" x 12"<span class="price">$58.88</span></a>
-            <a href="order11x14.html" class="size-btn btn-11x14">Order 11" x 14"<span class="price">$98.88</span></a>
+            <a href="stripe8x12.html" class="size-btn btn-8x12">
+                Order 8" x 12"
+                <span class="price">$58.88</span>
+            </a>
+
+            <a href="stripe11x14.html" class="size-btn btn-11x14">
+                Order 11" x 14"
+                <span class="price">$98.88</span>
+            </a>
         </div>
+        
         <br>
         <a href="index.html" class="back-link">← Return to Gallery</a>
     </div>
