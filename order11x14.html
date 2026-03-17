@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11x14 Order | Metal Memories 365</title>
+    <style>
+        :root { --neon-purple: #9d50bb; }
+        body { background: #000; color: #fff; font-family: 'Arial Black', sans-serif; padding: 20px; text-align: center; }
+        .form-card { max-width: 500px; margin: 40px auto; background: #111; padding: 30px; border-radius: 15px; border: 2px solid var(--neon-purple); text-align: left; }
+        h2 { color: var(--neon-purple); text-transform: uppercase; text-align: center; }
+        label { display: block; margin: 15px 0 5px; color: var(--neon-purple); font-size: 0.8rem; }
+        input, textarea { width: 100%; padding: 12px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #333; background: #000; color: #fff; box-sizing: border-box; }
+        .submit-btn { width: 100%; background: var(--neon-purple); color: #fff; border: none; padding: 18px; font-weight: bold; cursor: pointer; border-radius: 5px; text-transform: uppercase; }
+        
+        /* Success Message Styling */
+        #status { display: none; text-align: center; padding: 20px; }
+        .success-img { width: 120px; border-radius: 50%; border: 3px solid #ffcc00; margin-bottom: 15px; }
+        .pay-btn { display: inline-block; background: #6772e5; color: white; padding: 15px 30px; text-decoration: none; border-radius: 8px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+<div class="form-card">
+    <div id="order-form-container">
+        <h2>11x14 Sports Print</h2>
+        <p style="text-align:center; color:#ffcc00;">$98.88</p>
+        
+        <form id="my-form" action="https://formspree.io/f/xojkppgr" method="POST">
+            <label>Full Name</label>
+            <input type="text" name="name" required>
+            <label>Email</label>
+            <input type="email" name="email" required>
+            <label>Template #</label>
+            <input type="text" name="template" required>
+            <label>Notes (Name/#)</label>
+            <textarea name="message"></textarea>
+            <button id="submit-button" class="submit-btn">Send Order Details</button>
+        </form>
+    </div>
+
+    <div id="status">
+        <img src="thumbs-up.jpg" class="success-img">
+        <h3>PHOTOS RECEIVED!</h3>
+        <p>Details sent successfully. Click below to pay and start your print.</p>
+        <a href="YOUR_STRIPE_LINK_HERE" class="pay-btn">PAY $98.88 VIA STRIPE</a>
+    </div>
+</div>
+
+<script>
+    var form = document.getElementById("my-form");
+    
+    async function handleSubmit(event) {
+      event.preventDefault();
+      var status = document.getElementById("status");
+      var formContainer = document.getElementById("order-form-container");
+      var data = new FormData(event.target);
+      
+      fetch(event.target.action, {
+        method: form.method,
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      }).then(response => {
+        if (response.ok) {
+          formContainer.style.display = "none";
+          status.style.display = "block";
+        } else {
+          alert("Oops! There was a problem submitting your form");
+        }
+      }).catch(error => {
+        alert("Oops! There was a problem submitting your form");
+      });
+    }
+    form.addEventListener("submit", handleSubmit)
+</script>
+
+</body>
+</html>
