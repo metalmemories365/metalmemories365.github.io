@@ -1,1 +1,95 @@
-https://buy.stripe.com/6oU4gzgJd0Gh7XG4wjeME01
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8x12 Order | Metal Memories 365</title>
+    <style>
+        :root { --neon-blue: #00d2ff; }
+        body { background: #000; color: #fff; font-family: 'Arial Black', sans-serif; padding: 20px; text-align: center; }
+        .form-card { max-width: 500px; margin: 40px auto; background: #111; padding: 30px; border-radius: 15px; border: 2px solid var(--neon-blue); text-align: left; box-shadow: 0 0 20px rgba(0, 210, 255, 0.2); }
+        h2 { color: var(--neon-blue); text-transform: uppercase; text-align: center; margin-bottom: 5px; }
+        label { display: block; margin: 15px 0 5px; color: var(--neon-blue); font-size: 0.8rem; text-transform: uppercase; }
+        input, textarea { width: 100%; padding: 12px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #333; background: #000; color: #fff; box-sizing: border-box; font-family: sans-serif; }
+        .submit-btn { width: 100%; background: var(--neon-blue); color: #000; border: none; padding: 18px; font-weight: bold; cursor: pointer; border-radius: 5px; text-transform: uppercase; font-size: 1.1rem; transition: 0.3s; }
+        .submit-btn:hover { background: #fff; transform: scale(1.02); }
+        
+        /* Success Message - Hidden by default */
+        #status-message { display: none; text-align: center; padding: 20px; }
+        .success-img { width: 150px; height: 150px; object-fit: cover; border-radius: 50%; border: 3px solid #ffcc00; margin-bottom: 20px; box-shadow: 0 0 15px #ffcc00; }
+        .pay-btn { display: inline-block; background: #6772e5; color: white; padding: 20px 40px; text-decoration: none; border-radius: 10px; margin-top: 20px; font-size: 1.3rem; text-transform: uppercase; font-weight: bold; box-shadow: 0 4px 15px rgba(103,114,229,0.4); }
+    </style>
+</head>
+<body>
+
+<div class="form-card">
+    <div id="form-container">
+        <h2>8x12 Sports Print</h2>
+        <p style="text-align:center; color:#ffcc00; margin-top:0;">$58.88</p>
+        
+        <form id="order-form" action="https://formspree.io/f/xvzwvvje" method="POST" enctype="multipart/form-data">
+            <label>Full Name</label>
+            <input type="text" name="name" required>
+            
+            <label>Email Address</label>
+            <input type="email" name="email" required>
+            
+            <label>Template # (1 or 2 photos)</label>
+            <input type="text" name="template" placeholder="e.g. #12" required>
+            
+            <label>Upload Photo</label>
+            <input type="file" name="upload" accept="image/*">
+
+            <label>Player Name / Jersey #</label>
+            <textarea name="message" rows="3"></textarea>
+            
+            <button type="submit" id="submit-button" class="submit-btn">Send Order Details</button>
+        </form>
+    </div>
+
+    <div id="status-message">
+        <img src="thumbs-up.jpg" alt="Success" class="success-img">
+        <h3 style="color: #ffcc00;">PHOTOS RECEIVED!</h3>
+        <p>Details sent to Metal Memories. Click below to pay and start your print.</p>
+        <a href="https://buy.stripe.com/6oU4gzgJd0Gh7XG4wjeME01" class="pay-btn">PAY $58.88 NOW</a>
+    </div>
+</div>
+
+<script>
+    const form = document.getElementById("order-form");
+    const formContainer = document.getElementById("form-container");
+    const statusMessage = document.getElementById("status-message");
+    const submitBtn = document.getElementById("submit-button");
+
+    form.onsubmit = function(e) {
+        e.preventDefault();
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = "SENDING...";
+
+        const formData = new FormData(form);
+
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: { 'Accept': 'application/json' }
+        })
+        .then(response => {
+            if (response.ok) {
+                formContainer.style.display = "none";
+                statusMessage.style.display = "block";
+            } else {
+                alert("Something went wrong. Please try again.");
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = "Send Order Details";
+            }
+        })
+        .catch(error => {
+            alert("Connection error. Please check your internet.");
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = "Send Order Details";
+        });
+    };
+</script>
+
+</body>
+</html>
