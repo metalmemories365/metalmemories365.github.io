@@ -1,59 +1,69 @@
-<div class="metal-panel">
-    <div class="panel-title">YOUR DELUXE PRINT DETAILS</div>
+<div class="order-side">
+    <div class="panel-title">CONFIGURE YOUR PRINT</div>
 
-    <label for="size-select">Select Size</label>
-    <select id="size-select" onchange="updatePrice()">
-        <option value="" disabled selected>-- Select a Size --</option>
-        <option value="https://buy.stripe.com/6oU4gzgJd0Gh7XG4wjEME01">8x12 Metal Print - $58.88</option>
-        <option value="https://buy.stripe.com/8x2aEX50vex7a50gf1eME00">11x14 Metal Print - $98.88</option>
-    </select>
+    <form id="orderForm" action="https://formspree.io/f/metalmemories365@gmail.com" method="POST">
+        
+        <label for="size-select">1. Choose Your Dimensions</label>
+        <select id="size-select" name="Product_Size" onchange="updatePrice()" required>
+            <option value="" disabled selected>-- Select a Size --</option>
+            <option value="8x12 Metal Print - $58.88">8x12 Metal Print - $58.88</option>
+            <option value="11x14 Metal Print - $98.88">11x14 Metal Print - $98.88</option>
+        </select>
 
-    <label>Full Name</label>
-    <input type="text" id="cust-name" placeholder="Name for the order">
+        <label>2. Player Name & Team #</label>
+        <input type="text" name="Player_Name" id="cust-name" placeholder="e.g. Joshie Smith #5 - Dodgers" required>
 
-    <label>Background Style #</label>
-    <input type="text" id="cust-bg" placeholder="e.g., Background #4">
+        <label>3. Desired Background Style #</label>
+        <input type="text" name="Background_Style" id="cust-bg" placeholder="Refer to catalog, e.g. Style #4">
 
-    <label>Any Specific Notes?</label>
-    <textarea id="cust-notes" rows="3"></textarea>
+        <label>4. Custom Notes (Colors, etc.)</label>
+        <textarea name="Customer_Notes" id="cust-notes" rows="3" placeholder="e.g. Use Electric Green background colors..."></textarea>
 
-    <div class="price-display">Total: <span id="display-amount">$0.00</span></div>
+        <div class="price-display">Total: <span id="display-amount">$0.00</span></div>
 
-    <button class="buy-btn" onclick="goToCheckout()">COMPLETE PURCHASE</button>
+        <button type="submit" class="buy-btn">Submit Details & Pay</button>
+    </form>
 
-    <p style="font-size: 0.8rem; text-align: center; margin-top: 10px;">
-        * After payment, email photos to metalmemories365@gmail.com
-    </p>
+    <div class="footer-note">
+        * Clicking the button will save your details and open the secure Stripe payment page.
+    </div>
 </div>
 
 <script>
-    // 1. Updates the dollar amount on the screen
     function updatePrice() {
         const select = document.getElementById('size-select');
         const display = document.getElementById('display-amount');
-
-        if (select.value.includes("6oU4gzg")) { // 8x12 link
+        if (select.value.includes("8x12")) {
             display.innerText = '$58.88';
-        } else if (select.value.includes("8x2aEX")) { // 11x14 link
+        } else if (select.value.includes("11x14")) {
             display.innerText = '$98.88';
         }
     }
 
-    // 2. The "Forwarding" function
-    function goToCheckout() {
-        const stripeLink = document.getElementById('size-select').value;
-        const name = document.getElementById('cust-name').value;
-
-        if (!stripeLink) {
-            alert("Please select a size first.");
-            return;
+    // This script sends the form to your email first, then goes to Stripe
+    const form = document.getElementById('orderForm');
+    form.onsubmit = async (e) => {
+        e.preventDefault();
+        
+        // Determine which Stripe link to use based on selection
+        const size = document.getElementById('size-select').value;
+        let stripeLink = "";
+        
+        if (size.includes("8x12")) {
+            stripeLink = "https://buy.stripe.com/6oU4gzgJd0Gh7XG4wjEME01";
+        } else {
+            stripeLink = "https://buy.stripe.com/8x2aEX50vex7a50gf1eME00";
         }
-        if (!name) {
-            alert("Please enter your name so I know whose order this is!");
-            return;
-        }
 
-        // This opens your Stripe Payment Link in the same window
+        // Send the data to your email via Formspree
+        const formData = new FormData(form);
+        await fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: { 'Accept': 'application/json' }
+        });
+
+        // After the email is sent, forward them to Stripe
         window.location.href = stripeLink;
-    }
+    };
 </script>
