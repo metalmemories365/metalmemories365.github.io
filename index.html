@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Metal Memories 365 | Huntington Beach</title>
+    <title>Metal Memories 365 | Custom Metal Prints HB</title>
     <style>
         :root { 
             --neon-blue: #00d2ff; 
@@ -13,44 +13,81 @@
         }
         
         body { 
-            margin: 0; font-family: 'Arial Black', sans-serif; 
-            background: #000; color: #fff; text-align: center; 
+            margin: 0; 
+            font-family: 'Arial Black', Gadget, sans-serif; 
+            background: #000; 
+            color: #fff; 
+            text-align: center; 
+            line-height: 1.6;
         }
 
-        .container { max-width: 900px; margin: auto; padding: 20px; }
+        .container { 
+            max-width: 900px; 
+            margin: auto; 
+            padding: 20px; 
+        }
 
-        header { padding: 40px 0; }
-        h1 { font-size: 3rem; color: #ffcc00; text-shadow: 0 0 10px rgba(255, 204, 0, 0.5); margin: 0; }
+        header { 
+            padding: 50px 0; 
+        }
+        
+        h1 { 
+            font-size: clamp(2rem, 8vw, 3.5rem); 
+            color: #ffcc00; 
+            text-shadow: 0 0 15px rgba(255, 204, 0, 0.6); 
+            margin: 0; 
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            color: #888;
+            letter-spacing: 2px;
+            font-size: 1rem;
+            margin-top: 10px;
+        }
 
         /* Section Layout */
         .section-box {
             display: block;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
             text-decoration: none;
-            transition: transform 0.3s ease, filter 0.3s ease;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
+            border-radius: 15px;
+            overflow: hidden;
         }
 
         .section-box:hover {
-            transform: scale(1.02);
-            filter: brightness(1.1);
+            transform: scale(1.03);
         }
 
         .section-img {
             width: 100%;
-            border-radius: 15px;
             display: block;
+            transition: filter 0.3s ease;
         }
 
-        /* Border Glows */
+        .section-box:hover .section-img {
+            filter: brightness(1.15);
+        }
+
+        /* Border Glows - Matching your branding */
         .glow-blue { border: 4px solid var(--neon-blue); box-shadow: 0 0 25px var(--neon-blue); }
         .glow-purple { border: 4px solid var(--neon-purple); box-shadow: 0 0 25px var(--neon-purple); }
         .glow-pink { border: 4px solid var(--neon-pink); box-shadow: 0 0 25px var(--neon-pink); }
         .glow-orange { border: 4px solid var(--neon-orange); box-shadow: 0 0 25px var(--neon-orange); }
 
         footer { 
-            padding: 60px 20px; color: #555; border-top: 1px solid #222; 
-            font-size: 0.9rem; margin-top: 50px; 
+            padding: 80px 20px; 
+            color: #444; 
+            border-top: 1px solid #111; 
+            font-size: 0.85rem; 
+            margin-top: 60px; 
+        }
+
+        .contact-info {
+            color: #aaa;
+            margin-bottom: 10px;
         }
     </style>
 </head>
@@ -59,31 +96,33 @@
 <div class="container">
     <header>
         <h1>METAL MEMORIES 365</h1>
-        <p style="color: #888;">Custom Sublimation Prints & Memorials</p>
+        <div class="subtitle">PREMIUM CUSTOM METAL SUBLIMATION</div>
     </header>
 
     <a href="shop.html" class="section-box">
-        <img src="SPORTS.JPG" alt="Custom Sports Metal" class="section-img glow-blue">
+        <img src="SPORTS.JPG" alt="Custom Sports Metal Prints" class="section-img glow-blue">
     </a>
 
     <a href="#" class="section-box">
-        <img src="MEMORIES.JPG" alt="Holidays & Family" class="section-img glow-purple">
+        <img src="MEMORIES.JPG" alt="Holidays & Family Metal Prints" class="section-img glow-purple">
     </a>
 
     <a href="#" class="section-box">
-        <img src="WINDSPINNER.JPG" alt="Memorial Spinners" class="section-img glow-pink">
+        <img src="WINDSPINNER.JPG" alt="In Loving Memory Wind Spinners" class="section-img glow-pink">
     </a>
 
     <a href="#" class="section-box">
-        <img src="rightwing.jpg" alt="Political Art" class="section-img glow-orange">
+        <img src="rightwing.jpg" alt="Right Wing Political Art" class="section-img glow-orange">
     </a>
 
 </div>
 
 <footer>
-    <p>Located in Huntington Beach, CA</p>
-    <p>Contact: metalmemories365@gmail.com</p>
-    <p>&copy; 2026 Metal Memories. All Rights Reserved.</p>
+    <div class="contact-info">
+        Huntington Beach, California<br>
+        Email: <strong>metalmemories365@gmail.com</strong>
+    </div>
+    <p>&copy; 2026 Metal Memories. All rights reserved.</p>
 </footer>
 
 </body>
