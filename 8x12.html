@@ -11,79 +11,49 @@
         h2 { color: var(--neon-blue); text-transform: uppercase; text-align: center; margin-bottom: 5px; }
         label { display: block; margin: 15px 0 5px; color: var(--neon-blue); font-size: 0.8rem; text-transform: uppercase; }
         input, textarea { width: 100%; padding: 12px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #333; background: #000; color: #fff; box-sizing: border-box; font-family: sans-serif; }
-        input:focus { border-color: var(--neon-blue); outline: none; }
-        .submit-btn { width: 100%; background: var(--neon-blue); color: #000; border: none; padding: 18px; font-weight: bold; cursor: pointer; border-radius: 5px; text-transform: uppercase; font-size: 1.1rem; transition: 0.3s; }
-        .submit-btn:hover { background: #fff; transform: scale(1.02); }
-        
-        /* Success Message Styling */
+        .submit-btn { width: 100%; background: var(--neon-blue); color: #000; border: none; padding: 18px; font-weight: bold; cursor: pointer; border-radius: 5px; text-transform: uppercase; font-size: 1.1rem; }
         #status { display: none; text-align: center; padding: 20px; }
-        .success-img { width: 150px; height: 150px; object-fit: cover; border-radius: 50%; border: 3px solid #ffcc00; margin-bottom: 20px; box-shadow: 0 0 15px #ffcc00; }
-        .pay-btn { display: inline-block; background: #6772e5; color: white; padding: 20px 40px; text-decoration: none; border-radius: 10px; margin-top: 20px; font-size: 1.3rem; box-shadow: 0 4px 15px rgba(103, 114, 229, 0.4); text-transform: uppercase; }
-        .pay-btn:hover { background: #7a85f1; transform: scale(1.05); }
+        .success-img { width: 150px; height: 150px; object-fit: cover; border-radius: 50%; border: 3px solid #ffcc00; margin-bottom: 20px; }
+        .pay-btn { display: inline-block; background: #6772e5; color: white; padding: 20px 40px; text-decoration: none; border-radius: 10px; margin-top: 20px; font-size: 1.3rem; text-transform: uppercase; font-weight: bold; }
     </style>
 </head>
 <body>
-
 <div class="form-card">
     <div id="order-form-container">
         <h2>8x12 Sports Print</h2>
         <p style="text-align:center; color:#ffcc00; margin-top:0;">$58.88</p>
-        
         <form id="order-form" action="https://formspree.io/f/xvzwvvje" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="_subject" value="New 8x12 Order - Metal Memories">
             <label>Full Name</label>
-            <input type="text" name="name" placeholder="First & Last Name" required>
-            
+            <input type="text" name="name" required>
             <label>Email Address</label>
-            <input type="email" name="email" placeholder="your@email.com" required>
-            
+            <input type="email" name="email" required>
             <label>Template # (1 or 2 photos)</label>
-            <input type="text" name="template" placeholder="e.g. #12 Edison" required>
-            
+            <input type="text" name="template" placeholder="e.g. #12" required>
             <label>Upload Photo</label>
             <input type="file" name="upload" accept="image/*">
-
-            <label>Player Name / Jersey #</label>
-            <textarea name="message" rows="3" placeholder="Any special instructions?"></textarea>
-            
-            <button id="submit-button" class="submit-btn">Send Order Details</button>
+            <label>Player Name / Jersey # / Notes</label>
+            <textarea name="message" rows="3"></textarea>
+            <button type="submit" class="submit-btn">Send Order Details</button>
         </form>
     </div>
-
     <div id="status">
         <img src="thumbs-up.jpg" alt="Success" class="success-img">
         <h3 style="color: #ffcc00;">PHOTOS RECEIVED!</h3>
-        <p>Your details have been sent to Metal Memories. To finalize your order, click below to pay.</p>
-        
-        <a href="#" class="pay-btn">PAY $58.88 NOW</a>
+        <p>Your details were sent successfully. To finish your order, click below to pay.</p>
+        <a href="https://buy.stripe.com/6oU4gzgJd0Gh7XG4wjeME01" class="pay-btn">PAY $58.88 NOW</a>
     </div>
 </div>
-
 <script>
     var form = document.getElementById("order-form");
-    
-    async function handleSubmit(event) {
-      event.preventDefault();
-      var status = document.getElementById("status");
-      var formContainer = document.getElementById("order-form-container");
-      var data = new FormData(event.target);
-      
-      fetch(event.target.action, {
-        method: form.method,
-        body: data,
-        headers: { 'Accept': 'application/json' }
-      }).then(response => {
-        if (response.ok) {
-          formContainer.style.display = "none";
-          status.style.display = "block";
-        } else {
-          alert("Submission failed. Please check your connection and try again.");
-        }
-      }).catch(error => {
-        alert("Oops! There was a problem submitting your form.");
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' }
+      }).then(res => {
+          document.getElementById("order-form-container").style.display = "none";
+          document.getElementById("status").style.display = "block";
       });
-    }
-    form.addEventListener("submit", handleSubmit)
+    });
 </script>
-
 </body>
 </html>
