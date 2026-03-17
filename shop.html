@@ -3,58 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>8x12 Order | Metal Memories 365</title>
+    <title>Select Size | Metal Memories 365</title>
     <style>
-        :root { --neon-blue: #00d2ff; }
-        body { background: #000; color: #fff; font-family: 'Arial Black', sans-serif; padding: 20px; text-align: center; }
-        .form-card { max-width: 500px; margin: 40px auto; background: #111; padding: 30px; border-radius: 15px; border: 2px solid var(--neon-blue); text-align: left; box-shadow: 0 0 20px rgba(0, 210, 255, 0.2); }
-        h2 { color: var(--neon-blue); text-transform: uppercase; text-align: center; margin-bottom: 5px; }
-        label { display: block; margin: 15px 0 5px; color: var(--neon-blue); font-size: 0.8rem; text-transform: uppercase; }
-        input, textarea { width: 100%; padding: 12px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #333; background: #000; color: #fff; box-sizing: border-box; font-family: sans-serif; }
-        .submit-btn { width: 100%; background: var(--neon-blue); color: #000; border: none; padding: 18px; font-weight: bold; cursor: pointer; border-radius: 5px; text-transform: uppercase; font-size: 1.1rem; transition: 0.3s; }
-        .submit-btn:hover { background: #fff; transform: scale(1.02); }
-        #status { display: none; text-align: center; padding: 20px; }
-        .success-img { width: 150px; height: 150px; object-fit: cover; border-radius: 50%; border: 3px solid #ffcc00; margin-bottom: 20px; }
-        .pay-btn { display: inline-block; background: #6772e5; color: white; padding: 20px 40px; text-decoration: none; border-radius: 10px; margin-top: 20px; font-size: 1.3rem; text-transform: uppercase; font-weight: bold; }
+        :root { --neon-blue: #00d2ff; --neon-purple: #9d50bb; }
+        body { background: #000; color: #fff; font-family: 'Arial Black', sans-serif; text-align: center; margin: 0; padding: 40px 20px; }
+        .container { max-width: 900px; margin: auto; }
+        h1 { color: #ffcc00; text-transform: uppercase; font-size: 2.5rem; text-shadow: 0 0 10px rgba(255,204,0,0.5); }
+        .catalog-img { width: 100%; border-radius: 15px; border: 3px solid #333; margin-bottom: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .btn-container { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+        .size-btn { 
+            padding: 25px; font-size: 1.2rem; text-decoration: none; border-radius: 12px; font-weight: bold; transition: 0.3s;
+            width: 300px; text-transform: uppercase; display: flex; flex-direction: column; align-items: center;
+        }
+        .btn-8x12 { background: var(--neon-blue); color: #000; box-shadow: 0 0 20px var(--neon-blue); }
+        .btn-11x14 { background: var(--neon-purple); color: #fff; box-shadow: 0 0 20px var(--neon-purple); }
+        .size-btn:hover { transform: translateY(-5px); filter: brightness(1.2); }
+        .price { font-size: 2rem; display: block; margin-top: 5px; }
+        .back-link { display: inline-block; margin-top: 50px; color: #666; text-decoration: none; font-family: Arial, sans-serif; }
     </style>
 </head>
 <body>
-<div class="form-card">
-    <div id="order-form-container">
-        <h2>8x12 Sports Print</h2>
-        <p style="text-align:center; color:#ffcc00; margin-top:0;">$58.88</p>
-        <form id="order-form" action="https://formspree.io/f/xvzwvvje" method="POST" enctype="multipart/form-data">
-            <label>Full Name</label>
-            <input type="text" name="name" required>
-            <label>Email Address</label>
-            <input type="email" name="email" required>
-            <label>Template # (1 or 2 photos)</label>
-            <input type="text" name="template" placeholder="e.g. #12" required>
-            <label>Upload Photo</label>
-            <input type="file" name="upload" accept="image/*">
-            <label>Player Name / Jersey #</label>
-            <textarea name="message" rows="3"></textarea>
-            <button type="submit" class="submit-btn">Send Order Details</button>
-        </form>
+    <div class="container">
+        <h1>Choose Your Print Size</h1>
+        <img src="html.sports.jpg" alt="Sports Catalog" class="catalog-img">
+        
+        <div class="btn-container">
+            <a href="8x12.html" class="size-btn btn-8x12">
+                Order 8" x 12"
+                <span class="price">$58.88</span>
+            </a>
+            <a href="order11x14.html" class="size-btn btn-11x14">
+                Order 11" x 14"
+                <span class="price">$98.88</span>
+            </a>
+        </div>
+        <br>
+        <a href="index.html" class="back-link">← Return to Gallery</a>
     </div>
-    <div id="status">
-        <img src="thumbs-up.jpg" alt="Success" class="success-img">
-        <h3 style="color: #ffcc00;">PHOTOS RECEIVED!</h3>
-        <p>Details sent. Click below to pay and start your print.</p>
-        <a href="https://buy.stripe.com/6oU4gzgJd0Gh7XG4wjeME01" class="pay-btn">PAY $58.88 NOW</a>
-    </div>
-</div>
-<script>
-    var form = document.getElementById("order-form");
-    form.addEventListener("submit", function(e) {
-      e.preventDefault();
-      fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' }
-      }).then(res => {
-          document.getElementById("order-form-container").style.display = "none";
-          document.getElementById("status").style.display = "block";
-      });
-    });
-</script>
 </body>
-</html>
 </html>
