@@ -3,92 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Metal Memories 365 | Shop</title>
+    <title>Metal Memories 365 | Custom Shop</title>
     <style>
-        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #000; color: #fff; text-align: center; padding: 20px; }
-        .container { max-width: 1100px; margin: auto; }
-
-        /* Category Header Styles */
-        .section-title {
-            font-family: 'Impact', sans-serif;
-            font-size: 2.5rem;
-            color: #ffcc00;
-            margin: 50px 0 20px;
-            text-transform: uppercase;
-            border-bottom: 2px solid #333;
-            padding-bottom: 10px;
+        body { 
+            margin: 0; 
+            font-family: 'Arial Black', sans-serif; 
+            background: #000; 
+            color: #fff; 
+            text-align: center; 
         }
 
-        /* The Metal Panel Look */
-        .metal-panel {
-            background: linear-gradient(145deg, #999, #555);
-            border: 4px solid #333;
-            border-radius: 15px;
-            padding: 25px;
-            color: #000;
-            text-align: left;
-            margin-bottom: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        .container { max-width: 900px; margin: auto; padding: 10px; }
+
+        /* General Section Styling */
+        .section-box {
+            margin-bottom: 30px;
+            transition: transform 0.3s;
+            display: block;
+            text-decoration: none;
+        }
+        
+        /* Hover effect to make it feel interactive */
+        .section-box:hover {
+            transform: scale(1.02);
         }
 
-        .panel-title { font-family: 'Impact', sans-serif; font-size: 1.8rem; margin-bottom: 15px; }
-        label { font-weight: bold; display: block; margin-top: 15px; }
-        input, select, textarea { width: 100%; padding: 12px; margin-top: 5px; border-radius: 5px; border: 1px solid #888; box-sizing: border-box; }
-
-        .buy-btn {
-            background: #111; color: #fff; border: none; padding: 20px;
-            font-size: 1.5rem; font-weight: bold; border-radius: 8px;
-            cursor: pointer; width: 100%; margin-top: 20px; text-transform: uppercase;
-            transition: 0.3s;
+        .section-img {
+            width: 100%;
+            border-radius: 12px;
+            display: block;
         }
-        .buy-btn:hover { background: #ffcc00; color: #000; }
 
-        .price-tag { font-size: 1.8rem; font-weight: bold; color: #b00; margin-top: 10px; }
+        /* Neon Glow Frames */
+        .glow-blue { border: 3px solid #00d2ff; box-shadow: 0 0 20px #00d2ff; }
+        .glow-purple { border: 3px solid #9d50bb; box-shadow: 0 0 20px #9d50bb; }
+        .glow-pink { border: 3px solid #f06292; box-shadow: 0 0 20px #f06292; }
+        .glow-orange { border: 3px solid #ff9800; box-shadow: 0 0 20px #ff9800; }
+
+        /* Footer Info */
+        footer { 
+            padding: 40px; 
+            color: #888; 
+            font-size: 0.8rem; 
+            border-top: 1px solid #222; 
+            margin-top: 50px;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <img src="logo.png" alt="Metal Memories" style="max-width: 250px;">
+    
+    <h1 style="color: #ffcc00; margin: 30px 0;">METAL MEMORIES 365</h1>
 
-    <div class="section-title">Sports Collages</div>
-    <div class="metal-panel">
-        <div class="panel-title">CHAMPIONSHIP DETAILS</div>
-        <p>Turn game-day action into a metal masterpiece.</p>
-        <label>Player Name & Team</label>
-        <input type="text" id="sports-name" placeholder="e.g. Stelios - HB Oilers">
-        <div class="price-tag">$98.88</div>
-        <a href="https://buy.stripe.com/8x2aEX50vex7a50gf1eME00">
-            <button class="buy-btn">ORDER SPORTS COLLAGE</button>
-        </a>
-    </div>
+    <a href="https://buy.stripe.com/8x2aEX50vex7a50gf1eME00" class="section-box">
+        <img src="SPORTS.JPG" alt="Custom Sports Metal" class="section-img glow-blue">
+    </a>
 
-    <div class="section-title">Memorial Wind Spinners</div>
-    <div class="metal-panel">
-        <div class="panel-title">IN LOVING MEMORY</div>
-        <p>10-inch custom double-sided outdoor spinners.</p>
-        <label>Loved One's Name / Dates</label>
-        <input type="text" id="spinner-details" placeholder="e.g. William Chapman 1950-2024">
-        <div class="price-tag">$58.88</div>
-        <a href="https://buy.stripe.com/6oU4gzgJd0Gh7XG4wjEME01">
-            <button class="buy-btn">ORDER WIND SPINNER</button>
-        </a>
-    </div>
+    <a href="https://buy.stripe.com/8x2aEX50vex7a50gf1eME00" class="section-box">
+        <img src="MEMORIES.JPG" alt="Holidays and Family Memories" class="section-img glow-purple">
+    </a>
 
-    <div class="section-title">Holiday & Personal</div>
-    <div class="metal-panel">
-        <div class="panel-title">CUSTOM GIFT DETAILS</div>
-        <p>Perfect for Christmas, Weddings, or Birthdays.</p>
-        <label>Gift Message / Holiday Theme</label>
-        <input type="text" id="holiday-notes" placeholder="e.g. Merry Christmas 2026">
-        <div class="price-tag">$58.88</div>
-        <a href="https://buy.stripe.com/8x2aEX50vex7a50gf1eME00">
-            <button class="buy-btn">ORDER HOLIDAY PRINT</button>
-        </a>
-    </div>
+    <a href="https://buy.stripe.com/6oU4gzgJd0Gh7XG4wjEME01" class="section-box">
+        <img src="WINDSPINNER.JPG" alt="Memorial Wind Spinners" class="section-img glow-pink">
+    </a>
 
-    <p style="margin: 50px 0; color: #666;">* After payment, email all photos to metalmemories365@gmail.com</p>
+    <a href="#" class="section-box">
+        <img src="rightwing.jpg" alt="Right Wing Political Art" class="section-img glow-orange">
+    </a>
+
 </div>
+
+<footer>
+    <p>Questions? Email us at <strong>metalmemories365@gmail.com</strong></p>
+    <p>&copy; 2026 Metal Memories 365 - Huntington Beach, CA</p>
+</footer>
 
 </body>
 </html>
