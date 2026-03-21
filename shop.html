@@ -24,13 +24,14 @@
             box-shadow: 0 15px 40px rgba(0,0,0,0.9); 
         }
 
-        .btn-container { display: flex; gap: 25px; justify-content: center; flex-wrap: wrap; }
+        .btn-container { display: flex; gap: 25px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px;}
         
         /* Button Style matching the blue/purple buttons in your image */
         .size-btn { 
             padding: 25px; font-size: 1.3rem; text-decoration: none; border-radius: 10px; font-weight: bold; transition: 0.3s;
             width: 320px; text-transform: uppercase; display: flex; flex-direction: column; align-items: center;
             border: 1px solid rgba(255,255,255,0.2);
+            cursor: pointer; /* make it look clickable */
         }
         
         .btn-8x12 { 
@@ -49,7 +50,51 @@
         .price { font-size: 2.2rem; color: #ffcc00; display: block; margin-top: 5px; }
         
         .footer-note { margin-top: 50px; font-family: sans-serif; color: #666; font-size: 0.9rem; }
-    </style>
+
+        /* Styles for dynamic content */
+        #print-view-container {
+            margin-top: 40px;
+            padding: 20px;
+            border: 1px dashed #333;
+            border-radius: 10px;
+            min-height: 200px;
+            text-align: left;
+            display: none; /* hidden by default */
+        }
+        #print-view-container h2 {
+            text-transform: uppercase;
+            color: #ffcc00;
+            margin-bottom: 20px;
+        }
+        #print-view-container .content-text {
+            font-family: sans-serif;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #ccc;
+        }
+        .order-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            background-color: #ffcc00;
+            color: #000;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+        .order-btn:hover {
+            background-color: #fff;
+            color: #000;
+        }
+        #initial-view {
+            font-family: sans-serif;
+            color: #ccc;
+            margin-top: 60px;
+        }
+    </style>
 </head>
 <body>
 
@@ -66,22 +111,65 @@
         
         <img src="sportslanding.jpg" alt="Metal Memories Sports Catalog" class="catalog-img">
         
-        <div class="btn-container">
-            <a href="https://buy.stripe.com/6oU4gzgJd0Gh7XG4wjeME01" class="size-btn btn-8x12">
+                <div class="btn-container">
+            <a class="size-btn btn-8x12" onclick="showPrints('8x12')">
                 Order 8" x 12"
                 <span class="price">$58.88</span>
             </a>
 
-            <a href="https://buy.stripe.com/8x2aEX50vex7a5Ogf1eME00" class="size-btn btn-11x14">
+            <a class="size-btn btn-11x14" onclick="showPrints('11x14')">
                 Order 11" x 14"
                 <span class="price">$98.88</span>
             </a>
         </div>
+        
+        <div id="initial-view">
+            <h3>SELECT A SIZE ABOVE TO VIEW OPTIONS</h3>
+            <p>Your custom sports print starts here.</p>
+        </div>
+
+        <div id="print-view-container">
+            
+            <div id="8x12-content" style="display: none;">
+                <h2>8x12 Print Details</h2>
+                <div class="content-text">
+                    <p>Ideal for highlighting a single stellar performance or portrait.</p>
+                    <p>Utilizes 1 or 2 high-resolution photos in our dynamic custom templates.</p>
+                </div>
+                <a href="https://buy.stripe.com/6oU4gzgJd0Gh7XG4wjeME01" class="order-btn">Process 8x12 Payment</a>
+            </div>
+
+            <div id="11x14-content" style="display: none;">
+                <h2>11x14 Print Details</h2>
+                <div class="content-text">
+                    <p>Perfect for action collages or team memories. The larger canvas provides more detail and impact.</p>
+                    <p>Utilizes UP TO 4 high-resolution photos for our premium custom templates.</p>
+                </div>
+                <a href="https://buy.stripe.com/8x2aEX50vex7a5Ogf1eME00" class="order-btn">Process 11x14 Payment</a>
+            </div>
+            
+        </div>
         
         <p class="footer-note">Upload your photos & order your custom metal print today!</p>
     </div>
 
+    <script>
+        function showPrints(size) {
+            // Hide the initial view message
+            document.getElementById('initial-view').style.display = 'none';
+
+            // Show the container that holds the dynamic views
+            document.getElementById('print-view-container').style.display = 'block';
+
+            // Hide all sub-content divs first
+            document.getElementById('8x12-content').style.display = 'none';
+            document.getElementById('11x14-content').style.display = 'none';
+
+            // Show only the specific sub-content corresponding to the clicked button
+            document.getElementById(size + '-content').style.display = 'block';
+        }
+    </script>
+
 </body>
 </html>
-    </div>
 
