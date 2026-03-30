@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sticker Shop | Graffiti Slaps</title>
+    <style>
+        body {
+            background-color: #0d0d0d;
+            color: #ffffff;
+            font-family: 'Impact', sans-serif;
+            margin: 0;
+            text-align: center;
+        }
+
+        /* Navigation */
+        .nav-header {
+            padding: 20px;
+            background: #000;
+            border-bottom: 2px solid #ff6600;
+        }
+
+        .back-link {
+            color: #ff6600;
+            text-decoration: none;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+        }
+
+        /* Purchase Section */
+        .checkout-zone {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            padding: 50px 20px;
+            background: linear-gradient(to bottom, #1a1a1a, #0d0d0d);
+        }
+
+        .price-card {
+            border: 4px solid #ff6600;
+            padding: 30px;
+            width: 260px;
+            background: #000;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(255, 102, 0, 0.2);
+        }
+
+        .price-card h2 { margin: 0; font-size: 1.8rem; }
+        .amount { font-size: 3rem; color: #ff6600; margin: 15px 0; }
+
+        .buy-now {
+            background: #ff6600;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            text-transform: uppercase;
+            transition: 0.2s;
+        }
+
+        .buy-now:hover {
+            background: #fff;
+            color: #ff6600;
+        }
+
+        /* The Art Gallery */
+        .art-display {
+            padding: 40px 10px;
+        }
+
+        .main-img {
+            max-width: 100%;
+            height: auto;
+            border: 2px solid #333;
+            box-shadow: 0 0 40px rgba(0,0,0,0.9);
+        }
+
+        footer { padding: 50px; color: #444; font-family: sans-serif; }
+    </style>
+</head>
+<body>
+
+    <div class="nav-header">
+        <a href="index.html" class="back-link">← BACK TO HOME</a>
+    </div>
+
+    <h1>POLITICAL GRAFFITI STICKERS</h1>
+
+    <div class="checkout-zone">
+        <div class="price-card">
+            <h2>SINGLE TAG</h2>
+            <div class="amount">$4.00</div>
+            <button class="buy-now" onclick="checkout('PRICE_ID_FOR_4_DOLLARS')">Buy Now</button>
+        </div>
+
+        <div class="price-card">
+            <h2>TRIPLE THREAT</h2>
+            <div class="amount">$10.00</div>
+            <button class="buy-now" onclick="checkout('price_1TGiumGRwb0pbw5MzDCtaXAi')">Buy Now</button>
+        </div>
+    </div>
+
+    <div class="art-display">
+        <p>DESIGNS INCLUDED IN THIS COLLECTION:</p>
+        <img src="stickers.html.png" alt="Graffiti Sticker Designs" class="main-img">
+    </div>
+
+    <footer>© 2026 Graffiti Slaps. All sales final.</footer>
+
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+        // Replace with your Stripe Publishable Key https://buy.stripe.com/14AeVd8cH1Kl91Kgf1eME02)
+        const stripe = Stripe(https://buy.stripe.com/8x2dR98cH74Ffq81k7eME03);
+
+        function checkout(id) {
+            stripe.redirectToCheckout({
+                lineItems: [{ price: id, quantity: 1 }],
+                mode: 'payment',
+                successUrl: window.location.origin + '/success.html',
+                cancelUrl: window.location.href,
+            }).then(function (result) {
+                if (result.error) alert(result.error.message);
+            });
+        }
+    </script>
+</body>
+</html>
