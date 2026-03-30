@@ -13,7 +13,6 @@
             text-align: center;
         }
 
-        /* Navigation */
         .nav-header {
             padding: 20px;
             background: #000;
@@ -27,7 +26,6 @@
             font-weight: bold;
         }
 
-        /* Purchase Section */
         .checkout-zone {
             display: flex;
             flex-wrap: wrap;
@@ -49,16 +47,18 @@
         .price-card h2 { margin: 0; font-size: 1.8rem; }
         .amount { font-size: 3rem; color: #ff6600; margin: 15px 0; }
 
+        /* Styling the link to look like a button */
         .buy-now {
+            display: inline-block;
             background: #ff6600;
             color: white;
-            border: none;
+            text-decoration: none;
             padding: 15px 30px;
             font-size: 1.3rem;
             font-weight: bold;
-            cursor: pointer;
-            width: 100%;
+            width: 80%;
             text-transform: uppercase;
+            border-radius: 5px;
             transition: 0.2s;
         }
 
@@ -67,13 +67,12 @@
             color: #ff6600;
         }
 
-        /* The Art Gallery */
         .art-display {
             padding: 40px 10px;
         }
 
         .main-img {
-            max-width: 100%;
+            max-width: 95%;
             height: auto;
             border: 2px solid #333;
             box-shadow: 0 0 40px rgba(0,0,0,0.9);
@@ -94,38 +93,22 @@
         <div class="price-card">
             <h2>SINGLE TAG</h2>
             <div class="amount">$4.00</div>
-            <button class="buy-now" onclick="checkout(https://buy.stripe.com/00w00jeB588J5Py6EreME04)">Buy Now</button>
+            <a href="https://buy.stripe.com/14AeVd8cH1Kl91Kgf1eME02" class="buy-now">Buy Now</a>
         </div>
 
         <div class="price-card">
             <h2>TRIPLE THREAT</h2>
             <div class="amount">$10.00</div>
-            <button class="buy-now" onclick="checkout(https://buy.stripe.com/8x2dR98cH74Ffq81k7eME03)">Buy Now</button>
+            <a href="https://buy.stripe.com/8x2dR98cH74Ffq81k7eME03" class="buy-now">Buy Now</a>
         </div>
     </div>
 
     <div class="art-display">
         <p>DESIGNS INCLUDED IN THIS COLLECTION:</p>
-        <img src="stickers.html.png" alt="Graffiti Sticker Designs" class="main-img">
+        <img src="stickers.html.jpg" alt="Graffiti Sticker Designs" class="main-img">
     </div>
 
     <footer>© 2026 Graffiti Slaps. All sales final.</footer>
 
-    <script src="https://js.stripe.com/v3/"></script>
-    <script>
-        // Replace with your Stripe Publishable Key https://buy.stripe.com/14AeVd8cH1Kl91Kgf1eME02)
-        const stripe = Stripe(https://buy.stripe.com/8x2dR98cH74Ffq81k7eME03);
-
-        function checkout(id) {
-            stripe.redirectToCheckout({
-                lineItems: [{ price: id, quantity: 1 }],
-                mode: 'payment',
-                successUrl: window.location.origin + '/success.html',
-                cancelUrl: window.location.href,
-            }).then(function (result) {
-                if (result.error) alert(result.error.message);
-            });
-        }
-    </script>
 </body>
 </html>
